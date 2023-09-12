@@ -25,7 +25,7 @@ public Contact(PersonalInfo person, Address address, String phone, String email)
 /**
  * 
  */
-private class Address{
+protected class Address{ //Changed to protected so subclasses could access it.
     private String streetAddress;
     private String cityAddress;
     private String state;
