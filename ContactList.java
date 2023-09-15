@@ -1,5 +1,8 @@
 import java.io.File;
 import java.util.Scanner;
+
+
+
 import java.io.FileNotFoundException;
 
 /**
@@ -7,7 +10,7 @@ import java.io.FileNotFoundException;
  * @Author Matthew Elliott
  * Date 09/04/23
  */
-public class ContactList{
+public class ContactList {
 
 
     //These fields are just for testing purposes to see if file intake is done correctly
@@ -25,17 +28,17 @@ public class ContactList{
      * This method prompts the user for which files they would like to use and saves them in a
      * Contact field
      */
-    public void promptUser(){
+    public void promptUser() {
         //create scanner using the command line interface
         Scanner sc = new Scanner(System.in);
 
         //first prompt
         System.out.print("Enter filename for contact list 1> ");
-        contact1 = extractData(sc.next());
+        Table t1 = extractData(sc.next());
 
         //second prompt
         System.out.print("Enter filename for contact list 2> ");
-        contact2 = extractData(sc.next());
+        Table t2 = extractData(sc.next());
 
         System.out.print("Welcome to database display \r\n" + //
                 "\r\n" + //
@@ -69,8 +72,9 @@ public class ContactList{
      * 
      *     
      */
-     public String extractData(String fileLocation){
-        String toReturn = "";
+     public Table extractData(String fileLocation) {
+        Table toReturn = null;
+       
         try {
             //create a file object for file location
             File contactFile = new File(fileLocation);
@@ -78,11 +82,14 @@ public class ContactList{
             Scanner fileScanner = new Scanner(contactFile);
 
             //Read each line from file and save it to a string<<<< PROB save to contact obj
-            while (fileScanner.hasNextLine()){
-                toReturn = toReturn + " " + fileScanner.nextLine();
-            }
+            String contactType = fileScanner.next(); // the contact type
 
-            //close scanner
+            if (contactType.toUpperCase() == "P")
+                toReturn = makePersonalTable(fileScanner);
+            else if(contactType.toUpperCase() == "W")
+                //toReturn = makeWorkTable(fileScanner);
+            
+            
             fileScanner.close();
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
@@ -90,6 +97,39 @@ public class ContactList{
         return toReturn;
 
     }
+
+
+    public Table makePersonalTable (Scanner fileScanner) {
+
+        Table toReturn = null;
+
+        while (fileScanner.hasNextLine()){
+
+            //Splits line into Sing
+            String[] attributes = fileScanner.nextLine().split(","); 
+
+            // Trim each element in the array
+            for (int i = 0; i < attributes.length; i++) {
+                attributes[i] = attributes[i].trim();
+            }
+
+            PersonalInfo pInfo = new PersonalInfo(attributes[0], attributes[1], MaritalStatus.NA);
+            Contact.Address address = new Contact.Address(attributes[4], attributes[5], attributes[6], attributes[7]);
+            String phone = attributes[3];
+            String email = attributes[2];
+            Label label = Label.valueOf(attributes[8].toUpperCase()); 
+            
+            PersonalContact contact = new PersonalContact(pInfo, address, phone, email, label);
+                   
+
+           
+        }
+                //make contact obj
+                //append the object to a linked list i.e. table 1.
+
+        return toReturn;
+    }
+    
 
 
     public String toString(){

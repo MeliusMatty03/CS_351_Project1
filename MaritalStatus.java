@@ -4,4 +4,7 @@ public enum MaritalStatus{ //Fixed name here and everywhere else I saw it.
     DIVORCED,
     WIDOWED,
     NA;
+    
 }
+
+
