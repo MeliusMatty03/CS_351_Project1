@@ -87,7 +87,7 @@ public class ContactList {
             if (contactType.toUpperCase() == "P")
                 toReturn = makePersonalTable(fileScanner);
             else if(contactType.toUpperCase() == "W")
-                //toReturn = makeWorkTable(fileScanner);
+                toReturn = makeWorkTable(fileScanner);
             
             
             fileScanner.close();
@@ -121,11 +121,44 @@ public class ContactList {
             
             PersonalContact contact = new PersonalContact(pInfo, address, phone, email, label);
                    
-
+            //need to add contact to table
            
         }
                 //make contact obj
                 //append the object to a linked list i.e. table 1.
+
+        return toReturn;
+    }
+
+    public Table makeWorkTable(Scanner fileScanner) {
+        Table toReturn = null;
+
+        while (fileScanner.hasNextLine()){
+
+            //Splits line into Sing
+            String[] attributes = fileScanner.nextLine().split(","); 
+
+            // Trim each element in the array
+            for (int i = 0; i < attributes.length; i++) {
+                attributes[i] = attributes[i].trim();
+            }
+
+            MaritalStatus stat = MaritalStatus.valueOf(attributes[2].toUpperCase());
+
+            PersonalInfo pInfo = new PersonalInfo(attributes[0], attributes[1], stat);
+            Contact.Address address = new Contact.Address(attributes[5], attributes[6], attributes[7], attributes[8]);
+            String phone = attributes[4];
+            String email = attributes[3];
+
+            String title = attributes[9];
+            String dep = attributes[10];
+            
+            
+           WorkContact contact = new WorkContact(pInfo, address, phone, email, title, title, dep);
+                   
+            //add contact to table
+           
+        }
 
         return toReturn;
     }
