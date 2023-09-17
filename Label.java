@@ -1,6 +1,6 @@
 public enum Label {//Added constants
-    //mother, sister, brother, wife, dad
-    MOTHER,
+    //mom, sister, brother, wife, dad
+    MOM,
     DAD,
     SISTER,
     BROTHER,

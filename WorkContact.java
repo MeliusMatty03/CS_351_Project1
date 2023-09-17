@@ -12,4 +12,16 @@ public class WorkContact extends Contact {
         this.company = company;
         this.department = department;
     }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public String getCompany() {
+        return this.company;
+    }
+
+    public String getDepartment() {
+        return this.department;
+    }
 }

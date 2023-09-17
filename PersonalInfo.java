@@ -8,7 +8,18 @@ public class PersonalInfo {
     this.first = first;
     this.last = last;
     this.status = status;
-}
-    
+    }
+
+    public String getFirst(){
+        return this.first;
+    }
+
+    public String getLast(){
+        return this.last;
+    }
+
+    public MaritalStatus getStatus(){
+        return this.status;
+    }
 }
 

@@ -12,5 +12,8 @@ public class PersonalContact extends Contact{//Added field and constructor.
         super(person, address, phone, email);
         this.label = label;
     }
+    public Label getLabel(){
+        return this.label;
+    }
 }
 

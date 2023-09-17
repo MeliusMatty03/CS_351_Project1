@@ -21,6 +21,22 @@ public class Contact implements ContactInterface, Cloneable {
         this.email = email;
     }
 
+    public PersonalInfo getPerson(){
+        return this.person;
+    }
+
+    public String getPhone() {
+        return this.phone;
+    }
+
+    public Address getAddress() {
+        return this.address;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
     //...
     /**
      * 
@@ -36,6 +52,22 @@ public class Contact implements ContactInterface, Cloneable {
             this.cityAddress = cityAddress;
             this.state = state;
             this.zipCode = zipCode;
+        }
+
+        public String getStreetAddress(){
+            return this.streetAddress;
+        }
+
+        public String getCityAddress() {
+            return this.cityAddress;
+        }
+
+        public String getState() {
+            return this.state;
+        }
+
+        public String getZipCode() {
+            return this.zipCode;
         }
     }
     @Override
