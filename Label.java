@@ -1,5 +1,10 @@
-public enum Label {//Added constants
-    //mom, sister, brother, wife, dad
+/**
+ * @author Matthew Elliott
+ * @version 9/17/23
+ * Enum for personal label. Contains mom, dad, sister, brother, wife, husband, and friend.
+ */
+
+public enum Label {
     MOM,
     DAD,
     SISTER,
@@ -8,3 +13,4 @@ public enum Label {//Added constants
     HUSBAND,
     FRIEND
 }
+//End
