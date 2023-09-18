@@ -1,3 +1,5 @@
+
+
 /**
  * @author Matthew Elliott
  * @version 9/17/23
@@ -119,8 +121,15 @@ public class Contact implements ContactInterface, Cloneable {
     */
     @Override
     public boolean exists(String attribute) {
-        
-        throw new UnsupportedOperationException("Unimplemented method 'exists'");
+        Class<?> c = this.getClass();
+        Boolean toReturn = false;
+        try {
+            c.getDeclaredField(attribute);
+            toReturn = true;
+        } catch (NoSuchFieldException e) {
+            toReturn = false; 
+        }
+        return toReturn;
     }
 
     /**

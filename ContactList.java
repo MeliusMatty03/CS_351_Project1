@@ -10,7 +10,6 @@ import java.io.FileNotFoundException;
 
 public class ContactList {
 
-    //These fields are just for testing purposes to see if file intake is done correctly
     //should be changed into contact objects
     private final String CONTACT1 = "Contact List 1";
     private final String CONTACT2 = "Contact List 2";
