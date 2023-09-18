@@ -140,7 +140,6 @@ public class ContactList {
 
         System.out.println("Enter Contact List >");
         int contactList = sc.nextInt();
-
         return toReturn;
     }
 
@@ -258,6 +257,7 @@ public class ContactList {
     public Table<PersonalContact> makePersonalTable (Scanner fileScanner, String name) {
         //INSERT TABLE NAME
         Table<PersonalContact> toReturn = new Table<>(null, null, name);
+
 
         while (fileScanner.hasNextLine()){
             //Splits line into Sing

@@ -72,7 +72,7 @@ public class Contact implements ContactInterface, Cloneable {
          * @param state State in which the contact lives
          * @param zipCode Zip Code of the address
          */
-        Address(String streetAddress, String cityAddress, String state, String zipCode){
+        public Address(String streetAddress, String cityAddress, String state, String zipCode){
             this.streetAddress = streetAddress;
             this.cityAddress = cityAddress;
             this.state = state;
@@ -125,8 +125,8 @@ public class Contact implements ContactInterface, Cloneable {
 
     /**
     * Check to see if a record has an attribute containing a specific value. Should not be case sensitive.
-    * @param attribute possible attribute within a record.
-    * @param value desired value of the attribute.
+    * @param attribute possible attribute within a record. i.e. first, last, email... 
+    * @param value desired value of the attribute i.e. Cindy, Thompson.
     * @return true if the value is contained in the object, false otherwise.
     * @throws IllegalArgumentException if the attribute is invalid.
     */
