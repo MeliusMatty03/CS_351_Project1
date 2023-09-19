@@ -27,5 +27,51 @@ public class PersonalContact extends Contact{
     public Label getLabel(){
         return this.label;
     }
+
+    /**
+     * Compares this contact to another contact to determine if the two are equal.
+     * @return True if the two contacts are the same, false otherwise.
+     */
+    @Override
+    public Boolean equals(Contact other){
+        if(other instanceof PersonalContact){
+            PersonalContact personalOther = (PersonalContact)other;
+            return (super.equals(other) &&
+                this.label == personalOther.label);
+        }else{
+            return (super.equals(other));
+        }
+    }
+
+    @Override
+    public boolean exists(String attribute){
+        
+        return super.exists(attribute) || this.label.equals(attribute.toLowerCase());
+    }
+     @Override
+    public boolean hasValue(String attribute, String value) {
+        if(!this.exists(attribute)){throw new IllegalArgumentException();}
+        boolean toReturn = super.hasValue(attribute, value);
+        attribute = attribute.toLowerCase();
+        switch(attribute){
+            case "label":
+            toReturn = (this.getLabel() + "").equals(value);
+        }
+        return toReturn;
+    }
+    
+    @Override
+    public void setValue(String attribute, String value){
+        if(!this.hasValue(attribute, value)){throw new IllegalArgumentException();}
+        attribute = attribute.toLowerCase();
+        switch(attribute) {
+            case "label":
+                this.setLabel(attribute);
+        }
+    }
+
+    private void setLabel(String attribute) {
+        //this.label = MaritalStatus.
+    }
 }
 //End

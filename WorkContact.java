@@ -50,5 +50,22 @@ public class WorkContact extends Contact {
     public String getDepartment() {
         return this.department;
     }
+
+    /**
+     * Compares this contact to another contact to determine if the two are equal.
+     * @return True if the two contacts are the same, false otherwise.
+     */
+    @Override
+    public Boolean equals(Contact other){
+        if(other instanceof WorkContact){
+            WorkContact workOther = (WorkContact)other;
+            return (super.equals(other) &&
+                    this.title == workOther.title &&
+                    this.company == workOther.company &&
+                    this.department == workOther.department);
+        }else{
+            return (super.equals(other));
+        }
+    }
 }
 //End

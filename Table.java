@@ -4,7 +4,7 @@
  * A table used to store and organize objects and other data.
  */
 
-public class Table<T extends Contact> {
+public class Table<T extends Contact>{
     private Node head;     // First record in the table
     private Node tail;     // Last record in the table
     private String title;  // Label for the table
@@ -35,8 +35,31 @@ public class Table<T extends Contact> {
      * @return a new table comprised of nodes that are only in this table, but not the given table.
      */
     public Table<T> difference(Table<T> table){
-        //TO DO
         Table<T> toReturn = null;
+
+        Node thisCurrent = this.head;
+
+        //Puts first table into a temp.
+        while(thisCurrent.next != null){
+            toReturn.insert(thisCurrent.data);
+            thisCurrent = thisCurrent.next;
+        }
+
+        //Compares second table to the temp table.
+        while(thisCurrent.next != null){
+            Node otherCurrent = table.head;
+            Boolean same = false;
+            while(otherCurrent != null && !same){
+                if(thisCurrent == otherCurrent){
+                    same = true;
+                }
+            }
+            if(!same){
+                toReturn.insert(thisCurrent.data);
+            }
+            thisCurrent = thisCurrent.next;
+        }
+
         return toReturn;
     }
 

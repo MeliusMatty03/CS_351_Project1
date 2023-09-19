@@ -1,5 +1,4 @@
 
-
 /**
  * @author Matthew Elliott
  * @version 9/17/23
@@ -112,6 +111,22 @@ public class Contact implements ContactInterface, Cloneable {
         public String getZipCode() {
             return this.zipCode;
         }
+
+        public void setStreetAddress(String value) {
+            this.streetAddress = value;
+        }
+
+        public void setCityAddress(String value) {
+            this.cityAddress = value;
+        }
+
+        public void setState(String value) {
+            this.state = value;
+        }
+
+        public void setZipCode(String value) {
+            this.zipCode = value;
+        }
     }
 
     /**
@@ -121,15 +136,15 @@ public class Contact implements ContactInterface, Cloneable {
     */
     @Override
     public boolean exists(String attribute) {
-        Class<?> c = this.getClass();
-        Boolean toReturn = false;
-        try {
-            c.getDeclaredField(attribute);
-            toReturn = true;
-        } catch (NoSuchFieldException e) {
-            toReturn = false; 
-        }
-        return toReturn;
+        return (person.getLast().equals(attribute.toLowerCase()) || 
+                person.getFirst().equals(attribute.toLowerCase()) ||
+                (person.getStatus() + "").equals(attribute.toLowerCase()) ||
+                address.getCityAddress().equals(attribute.toLowerCase()) ||
+                address.getStreetAddress().equals(attribute.toLowerCase()) ||
+                address.getState().equals(attribute.toLowerCase()) ||
+                (address.getZipCode() + "").equals(attribute.toLowerCase()) ||
+                phone.equals(attribute.toLowerCase()) ||
+                email.equals(attribute.toLowerCase()));
     }
 
     /**
@@ -141,9 +156,43 @@ public class Contact implements ContactInterface, Cloneable {
     */
     @Override
     public boolean hasValue(String attribute, String value) throws IllegalArgumentException {
+        if(!this.exists(attribute)){throw new IllegalArgumentException();}
         
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'hasValue'");
+        boolean toReturn = false;
+        attribute = attribute.toLowerCase();
+        switch(attribute){
+            case "last":
+                toReturn = this.person.getLast().toLowerCase().equals(value);
+                break;
+            case "first":
+                toReturn = this.person.getFirst().toLowerCase().equals(value);
+                break;
+            case "status":
+                toReturn = (this.person.getStatus() + "").toLowerCase().equals(value);
+                break;
+            case "streetaddress":
+                toReturn = this.address.getStreetAddress().toLowerCase().equals(value);
+                break;
+            case "cityaddress":
+                toReturn = this.address.getCityAddress().toLowerCase().equals(value);
+                break;
+            case "state":
+                toReturn = this.address.getState().toLowerCase().equals(value);
+                break;
+            case "zipcode":
+                toReturn = (this.address.getZipCode() + "").toLowerCase().equals(value);
+                break;
+            case "phone":
+                toReturn = this.getPhone().toLowerCase().equals(value);
+                break;
+            case "email":
+                toReturn = this.getEmail().toLowerCase().equals(value);
+                break;
+            default:
+                throw new IllegalArgumentException();
+
+        }
+        return toReturn;
     }
 
     /**
@@ -154,8 +203,74 @@ public class Contact implements ContactInterface, Cloneable {
     */
     @Override
     public void setValue(String attribute, String value) throws IllegalArgumentException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'setValue'");
+        if(!this.hasValue(attribute, value)){throw new IllegalArgumentException();}
+
+        attribute = attribute.toLowerCase();
+        switch(attribute){
+            case "last":
+                this.person.setLast(value);
+                break;
+            case "first":
+                this.person.setFirst(value);
+                break;
+            case "status":
+                this.person.setStatus(value);
+                break;
+            case "streetaddress":
+                this.address.setStreetAddress(value);
+                break;
+            case "cityaddress":
+                this.address.setCityAddress(value);
+                break;
+            case "state":
+                this.address.setState(value);
+                break;
+            case "zipcode":
+                this.address.setZipCode(value);
+                break;
+            case "phone":
+                this.setPhone(value);
+                break;
+            case "email":
+                this.setEmail(value);
+                break;
+            default:
+                throw new UnsupportedOperationException("Unimplemented method 'setValue'");
+
+        }
+
+    }
+    
+    /**
+     * setter for Email
+     * @param value
+     */
+    private void setEmail(String value) {
+        this.email = value;
+    }
+    /**
+     * setter for phone
+     * @param value
+     */
+    private void setPhone(String value) {
+        this.phone = value;
+    }
+
+
+    /**
+     * Compares this contact to another contact to determine if the two are equal.
+     * @return True if the two co
+     */
+    public Boolean equals(Contact other){
+        return (this.person.getFirst() == other.person.getFirst() &&
+                this.person.getLast() == other.person.getLast() &&
+                this.person.getStatus() == other.person.getStatus() &&
+                this.address.getStreetAddress() == other.address.getStreetAddress() &&
+                this.address.getCityAddress() == other.address.getCityAddress() &&
+                this.address.getState() == other.address.getState() &&
+                this.address.getZipCode() == other.address.getZipCode() &&
+                this.phone == other.phone &&
+                this.email == other.email);
     }
 }
 //End

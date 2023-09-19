@@ -44,5 +44,28 @@ public class PersonalInfo {
     public MaritalStatus getStatus(){
         return this.status;
     }
+
+    /**
+     * Setter for last name
+     * @param value
+     */
+    public void setLast(String value) {
+        this.last = value;
+    }
+
+    /**
+     * setter for First name
+     * @param value
+     */
+    public void setFirst(String value) {
+    }
+
+    /**
+     * setter for status
+     * @param value
+     */
+    public void setStatus(String value) {
+        this.status = MaritalStatus.valueOf(value);
+    }
 }
 //End
